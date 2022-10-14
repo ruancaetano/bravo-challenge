@@ -19,10 +19,10 @@ type AddCurrencyUseCaseOutputDTO struct {
 }
 
 type AddCurrencyUseCase struct {
-	CurrencyRepository repositories.CurrencyRepository
+	CurrencyRepository repositories.CurrencyRepositoryInterface
 }
 
-func NewAddCurrencyUseCase(currencyRepository repositories.CurrencyRepository) *AddCurrencyUseCase {
+func NewAddCurrencyUseCase(currencyRepository repositories.CurrencyRepositoryInterface) *AddCurrencyUseCase {
 	return &AddCurrencyUseCase{
 		CurrencyRepository: currencyRepository,
 	}

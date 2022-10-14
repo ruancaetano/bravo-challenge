@@ -9,10 +9,10 @@ type DeleteCurrencyUseCaseInputDTO struct {
 }
 
 type GetCurrencyUseCase struct {
-	CurrencyRepository repositories.CurrencyRepository
+	CurrencyRepository repositories.CurrencyRepositoryInterface
 }
 
-func NewDeleteCurrencyUseCase(currencyRepository repositories.CurrencyRepository) *GetCurrencyUseCase {
+func NewDeleteCurrencyUseCase(currencyRepository repositories.CurrencyRepositoryInterface) *GetCurrencyUseCase {
 	return &GetCurrencyUseCase{
 		CurrencyRepository: currencyRepository,
 	}
