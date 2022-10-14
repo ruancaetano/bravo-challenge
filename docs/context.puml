@@ -1,0 +1,18 @@
+@startuml "Hurb Bravo Challenge - Context Diagram"
+
+title "Hurb Bravo Challenge - Context Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+Person(client,"Client", "API client")
+
+System(currency_api, "Currency Api", "API for currency conversion")
+System_Ext(currency_external_api, "External Currency Api", "External api used to get real time currency information")
+
+
+Rel(client, currency_api, "Request conversion", "HTTPS")
+Rel(client, currency_api, "Add/Remove supported currencies", "HTTPS")
+Rel(currency_api, currency_external_api, "Request real time currency information", "HTTPS")
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml "Hurb Bravo Challenge - Container Diagram"
+
+title "Hurb Bravo Challenge - Container Diagram"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+Person(client,"Client", "API client")
+System_Ext(currency_external_api, "External Currency Api", "External api used to get real time currency information")
+
+System_Boundary(currency_api_boundarym, "Currency api boundary") {
+    Container(currency_api, "Currency API", "Go", "API for currency conversion")
+    ContainerDb(currency_api_db, "Currency API database", "Postgresql", "Holds supported currencies")
+    ContainerDb(currency_api_cache, "Currency API cache", "Redis", "Caches real time currency information")
+}
+
+
+Rel(client, currency_api, "Uses", "HTTPS")
+Rel(currency_api, currency_api_db, "Uses", "Postgresql Driver")
+Rel(currency_api, currency_api_cache, "Uses", "Redis Driver")
+Rel(currency_api, currency_external_api, "Uses", "HTTPS")
+
+@enduml
