@@ -1,8 +1,8 @@
 package get_currency
 
 import (
-	"github.com/ruancaetano/challenge-bravo/internal/domain/entities"
-	"github.com/ruancaetano/challenge-bravo/internal/domain/repositories"
+	"github.com/ruancaetano/challenge-bravo/domain/entities"
+	"github.com/ruancaetano/challenge-bravo/domain/repositories"
 )
 
 type GetCurrencyUseCaseInputDTO struct {

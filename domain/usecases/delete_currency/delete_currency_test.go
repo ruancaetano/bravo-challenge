@@ -3,8 +3,8 @@ package delete_currency_test
 import (
 	"testing"
 
-	"github.com/ruancaetano/challenge-bravo/internal/domain/entities"
-	"github.com/ruancaetano/challenge-bravo/internal/domain/usecases/delete_currency"
+	"github.com/ruancaetano/challenge-bravo/domain/entities"
+	"github.com/ruancaetano/challenge-bravo/domain/usecases/delete_currency"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
