@@ -3,7 +3,7 @@ package entities_test
 import (
 	"testing"
 
-	"github.com/ruancaetano/challenge-bravo/domain/entities"
+	"github.com/ruancaetano/challenge-bravo/internal/domain/entities"
 	"github.com/stretchr/testify/assert"
 )
 
