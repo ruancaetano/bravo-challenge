@@ -2,6 +2,8 @@ package sqlite
 
 import (
 	"database/sql"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type DBManager struct {
@@ -14,8 +16,8 @@ func NewDBManager() *DBManager {
 	}
 }
 
-func (m *DBManager) Open(driverName string, dsn string) error {
-	db, err := sql.Open(driverName, dsn)
+func (m *DBManager) Open(databaseFile string) error {
+	db, err := sql.Open("sqlite3", databaseFile)
 	if err != nil {
 		return err
 	}

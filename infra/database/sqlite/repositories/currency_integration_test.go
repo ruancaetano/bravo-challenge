@@ -8,7 +8,6 @@ import (
 	"log"
 	"testing"
 
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/ruancaetano/challenge-bravo/domain/entities"
@@ -19,7 +18,7 @@ import (
 var manager = sqlite.NewDBManager()
 
 func setUp() *repositories.SqliteCurrencyRepository {
-	manager.Open("sqlite3", ":memory:")
+	manager.Open(":memory:")
 
 	craeteTable(manager.DB)
 
