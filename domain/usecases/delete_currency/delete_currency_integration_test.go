@@ -1,4 +1,4 @@
-package add_currency_test
+package delete_currency_test
 
 import (
 	"database/sql"
@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/ruancaetano/challenge-bravo/domain/entities"
-	"github.com/ruancaetano/challenge-bravo/domain/usecases/add_currency"
+	"github.com/ruancaetano/challenge-bravo/domain/usecases/delete_currency"
 	"github.com/ruancaetano/challenge-bravo/infra/database/sqlite"
 	"github.com/ruancaetano/challenge-bravo/infra/database/sqlite/repositories"
 	"github.com/stretchr/testify/assert"
@@ -40,22 +40,24 @@ func craeteTable(db *sql.DB) {
 	stmt.Exec()
 }
 
-func TestAddCurrencyUseCaseIntegration_Execute(t *testing.T) {
+func TestDeleteCurrencyUseCaseIntegration_Execute(t *testing.T) {
 	repository := setUp()
 	defer manager.Close()
 
-	usecase := add_currency.NewAddCurrencyUseCase(repository)
+	usecase := delete_currency.NewDeleteCurrencyUseCase(repository)
 
-	output, err := usecase.Execute(&add_currency.AddCurrencyUseCaseInputDTO{
-		Code:                  "USD",
-		Type:                  entities.FIAT,
-		DollarBasedProportion: 0,
+	currency, err := entities.NewCurrency("USD", entities.FIAT, 0)
+	assert.Nil(t, err)
+
+	err = repository.Create(currency)
+	assert.Nil(t, err)
+
+	err = usecase.Execute(&delete_currency.DeleteCurrencyUseCaseInputDTO{
+		Code: "USD",
 	})
 
 	assert.Nil(t, err)
-	assert.NotEmpty(t, output.ID)
 
-	foundCurrency, err := repository.Get("USD")
-
-	assert.Equal(t, foundCurrency.ID, output.ID)
+	_, err = repository.Get("USD")
+	assert.Error(t, err, "sql: no rows in result set")
 }
