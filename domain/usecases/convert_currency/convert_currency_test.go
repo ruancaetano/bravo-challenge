@@ -100,7 +100,7 @@ func TestConvertCurrencyUseCase_Execute(t *testing.T) {
 
 		serviceMock.On("Convert", "USD", "BTC", mock.Anything).Return(&services.CurrencyConverterServiceResponse{
 			FromCurrencyCode: "USD",
-			ToCurrencyCode:   "BRL",
+			ToCurrencyCode:   "BTC",
 			Value:            float64(0.000051),
 		}, nil)
 
