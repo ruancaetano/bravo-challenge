@@ -88,6 +88,14 @@ func (u *ConvertCurrencyUseCase) convertFromRealToFicticiousCurrency(fromCurrenc
 func (u *ConvertCurrencyUseCase) convertFromFicticiousToRealCurrency(fromCurrency *entities.Currency, toCurrency *entities.Currency, amount float64) (*ConvertCurrencyUseCaseOutputDTO, error) {
 	ficticiousAmountInDollar := amount * fromCurrency.DollarBasedProportion
 
+	if toCurrency.Code == "USD" {
+		return &ConvertCurrencyUseCaseOutputDTO{
+			FromCurrencyCode: fromCurrency.Code,
+			ToCurrencyCode:   toCurrency.Code,
+			Value:            formatValueBasedOnCurrency(toCurrency, ficticiousAmountInDollar),
+		}, nil
+	}
+
 	result, err := u.CurrencyConverterService.Convert("USD", toCurrency.Code, ficticiousAmountInDollar)
 	if err != nil {
 		return nil, err
