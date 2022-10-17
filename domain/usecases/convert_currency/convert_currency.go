@@ -2,6 +2,7 @@ package convert_currency
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/ruancaetano/challenge-bravo/domain/entities"
 	"github.com/ruancaetano/challenge-bravo/domain/repositories"
@@ -33,14 +34,14 @@ func NewConvertCurrencyUseCase(repository repositories.CurrencyRepositoryInterfa
 }
 
 func (u *ConvertCurrencyUseCase) Execute(input *ConvertCurrencyUseCaseInputDTO) (*ConvertCurrencyUseCaseOutputDTO, error) {
-	fromCurrency, err := u.CurrencyRepository.Get(input.FromCurrencyCode)
+	fromCurrency, err := u.CurrencyRepository.Get(strings.ToUpper(input.FromCurrencyCode))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s is not a supported currency", strings.ToUpper(input.FromCurrencyCode))
 	}
 
-	toCurrency, err := u.CurrencyRepository.Get(input.ToCurrencyCode)
+	toCurrency, err := u.CurrencyRepository.Get(strings.ToUpper(input.ToCurrencyCode))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s is not a supported currency", strings.ToUpper(input.ToCurrencyCode))
 	}
 
 	if fromCurrency.Type != entities.FICTICIOUS && toCurrency.Type != entities.FICTICIOUS {

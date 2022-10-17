@@ -1,6 +1,8 @@
 package get_currency
 
 import (
+	"strings"
+
 	"github.com/ruancaetano/challenge-bravo/domain/entities"
 	"github.com/ruancaetano/challenge-bravo/domain/repositories"
 )
@@ -27,7 +29,7 @@ func NewGetCurrencyUseCase(currencyRepository repositories.CurrencyRepositoryInt
 }
 
 func (u *GetCurrencyUseCase) Execute(input *GetCurrencyUseCaseInputDTO) (*GetCurrencyUseCaseOutputDTO, error) {
-	currency, err := u.CurrencyRepository.Get(input.Code)
+	currency, err := u.CurrencyRepository.Get(strings.ToUpper(input.Code))
 	if err != nil {
 		return nil, err
 	}

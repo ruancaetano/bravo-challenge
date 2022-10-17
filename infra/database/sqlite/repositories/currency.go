@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"database/sql"
 	"errors"
 
 	"github.com/ruancaetano/challenge-bravo/domain/entities"
@@ -37,11 +38,18 @@ func (r *SqliteCurrencyRepository) Get(code string) (*entities.Currency, error) 
 	}
 
 	currency := &entities.Currency{}
+	currency.DollarBasedProportion = 0
 
-	err = stmt.QueryRow(code).Scan(&currency.ID, &currency.Code, &currency.Type, &currency.DollarBasedProportion)
+	var dollarBasedProportion sql.NullFloat64
+
+	err = stmt.QueryRow(code).Scan(&currency.ID, &currency.Code, &currency.Type, &dollarBasedProportion)
 
 	if err != nil {
 		return nil, err
+	}
+
+	if dollarBasedProportion.Valid {
+		currency.DollarBasedProportion = dollarBasedProportion.Float64
 	}
 
 	return currency, nil

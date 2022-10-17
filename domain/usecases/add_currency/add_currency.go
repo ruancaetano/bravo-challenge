@@ -1,6 +1,8 @@
 package add_currency
 
 import (
+	"strings"
+
 	"github.com/ruancaetano/challenge-bravo/domain/entities"
 	"github.com/ruancaetano/challenge-bravo/domain/repositories"
 )
@@ -42,7 +44,7 @@ func (u *AddCurrencyUseCase) Execute(input *AddCurrencyUseCaseInputDTO) (*AddCur
 
 	return &AddCurrencyUseCaseOutputDTO{
 		ID:                    currency.ID,
-		Code:                  currency.Code,
+		Code:                  strings.ToUpper(currency.Code),
 		Type:                  currency.Type,
 		DollarBasedProportion: currency.DollarBasedProportion,
 	}, nil
