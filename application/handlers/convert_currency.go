@@ -9,7 +9,7 @@ import (
 	"github.com/ruancaetano/challenge-bravo/domain/usecases/convert_currency"
 )
 
-func MakeConvertRequestHandler(r *mux.Router, usecase *convert_currency.ConvertCurrencyUseCase) func(w http.ResponseWriter, r *http.Request) {
+func MakeConvertCurrencyRequestHandler(r *mux.Router, usecase *convert_currency.ConvertCurrencyUseCase) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -27,6 +27,7 @@ func MakeConvertRequestHandler(r *mux.Router, usecase *convert_currency.ConvertC
 			Amount:           amount,
 		})
 		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
 			HandleError(w, err.Error())
 			return
 		}

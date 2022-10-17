@@ -1,0 +1,1 @@
+GET http://localhost:8000/currency/convert?from=BTC&to=USD&amount=1

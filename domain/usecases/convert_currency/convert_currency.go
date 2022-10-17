@@ -10,15 +10,15 @@ import (
 )
 
 type ConvertCurrencyUseCaseInputDTO struct {
-	FromCurrencyCode string
-	ToCurrencyCode   string
-	Amount           float64
+	FromCurrencyCode string  `json:"fromCurrencyCode"`
+	ToCurrencyCode   string  `json:"toCurrencyCode"`
+	Amount           float64 `json:"amount"`
 }
 
 type ConvertCurrencyUseCaseOutputDTO struct {
-	FromCurrencyCode string
-	ToCurrencyCode   string
-	Value            string
+	FromCurrencyCode string `json:"fromCurrencyCode"`
+	ToCurrencyCode   string `json:"toCurrencyCode"`
+	Value            string `json:"value"`
 }
 
 type ConvertCurrencyUseCase struct {

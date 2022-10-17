@@ -19,7 +19,6 @@ func NewAwesomeCurrencyConverterService() *AwesomeCurrencyConverterService {
 }
 
 func (s *AwesomeCurrencyConverterService) Convert(fromCode string, toCode string, amount float64) (*services.CurrencyConverterServiceResponse, error) {
-	fmt.Printf("%s/%s-%s", API_URL, fromCode, toCode)
 	resp, err := http.Get(fmt.Sprintf("%s/%s-%s", API_URL, fromCode, toCode))
 	if err != nil {
 		return nil, err

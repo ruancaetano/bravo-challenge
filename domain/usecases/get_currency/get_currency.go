@@ -8,14 +8,14 @@ import (
 )
 
 type GetCurrencyUseCaseInputDTO struct {
-	Code string
+	Code string `json:"code"`
 }
 
 type GetCurrencyUseCaseOutputDTO struct {
-	ID                    string
-	Code                  string
-	Type                  entities.CurrencyType
-	DollarBasedProportion float64
+	ID                    string                `json:"id"`
+	Code                  string                `json:"code"`
+	Type                  entities.CurrencyType `json:"type"`
+	DollarBasedProportion float64               `json:"dollarBasedProportion"`
 }
 
 type GetCurrencyUseCase struct {

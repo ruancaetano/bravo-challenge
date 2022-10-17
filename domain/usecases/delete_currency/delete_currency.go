@@ -5,20 +5,20 @@ import (
 )
 
 type DeleteCurrencyUseCaseInputDTO struct {
-	Code string
+	Code string `json:"code"`
 }
 
-type GetCurrencyUseCase struct {
+type DeleteCurrencyUseCase struct {
 	CurrencyRepository repositories.CurrencyRepositoryInterface
 }
 
-func NewDeleteCurrencyUseCase(currencyRepository repositories.CurrencyRepositoryInterface) *GetCurrencyUseCase {
-	return &GetCurrencyUseCase{
+func NewDeleteCurrencyUseCase(currencyRepository repositories.CurrencyRepositoryInterface) *DeleteCurrencyUseCase {
+	return &DeleteCurrencyUseCase{
 		CurrencyRepository: currencyRepository,
 	}
 }
 
-func (u *GetCurrencyUseCase) Execute(input *DeleteCurrencyUseCaseInputDTO) error {
+func (u *DeleteCurrencyUseCase) Execute(input *DeleteCurrencyUseCaseInputDTO) error {
 	err := u.CurrencyRepository.Delete(input.Code)
 	if err != nil {
 		return err

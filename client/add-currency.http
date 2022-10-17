@@ -1,0 +1,7 @@
+POST http://localhost:8000/currency
+
+{
+    "type": "FIAT",
+    "code": "ANG",
+    "dollarBasedProportion": 0
+}

@@ -1,4 +1,4 @@
-create table currencies (id string, code string, type string, dollar_based_proportion number);
+create table currencies (id string, code string unique, type string, dollar_based_proportion number);
 
 insert into currencies (id, code, type, dollar_based_proportion) values ('1', 'USD', 'FIAT', 0);
 insert into currencies (id, code, type, dollar_based_proportion) values ('2', 'BRL', 'FIAT', 0);
