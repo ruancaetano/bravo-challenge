@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  app:
+    container_name: bravo-challenge-api
+    build: .
+    ports:
+      - 8000:8000
+    
+
