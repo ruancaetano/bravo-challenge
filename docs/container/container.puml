@@ -10,14 +10,14 @@ System_Ext(currency_external_api, "External Currency Api", "External api used to
 
 System_Boundary(currency_api_boundarym, "Currency api boundary") {
     Container(currency_api, "Currency API", "Go", "API for currency conversion")
-    ContainerDb(currency_api_db, "Currency API database", "Postgresql", "Holds supported currencies")
-    ContainerDb(currency_api_cache, "Currency API cache", "Redis", "Caches real time currency information")
+    ContainerDb(currency_api_db, "Currency API database", "SQLite3", "Holds supported currencies")
+    ContainerDb(currency_api_cache, "Currency API cache", "InMemory", "Caches real time currency information")
 }
 
 
 Rel(client, currency_api, "Uses", "HTTPS")
-Rel(currency_api, currency_api_db, "Uses", "Postgresql Driver")
-Rel(currency_api, currency_api_cache, "Uses", "Redis Driver")
+Rel(currency_api, currency_api_db, "Uses", "SQLite3 Driver")
+Rel(currency_api, currency_api_cache, "Uses", "Local in-memory cache interface")
 Rel(currency_api, currency_external_api, "Uses", "HTTPS")
 
 @enduml
